@@ -14,11 +14,15 @@ for i in range(20):
 def agent_portrayal(agent):
   portrayal = {
     "Shape": "circle", 
-    "Color": "red", 
     "Filled": "true", 
     "Layer": 0, 
     "r": 0.5 
   }
+  
+  if type(agent) is Alpha:
+    portrayal["Color"] = "red"
+  elif type(agent) is Omega:
+    portrayal["Color"] = "blue"
 
   return portrayal
 
