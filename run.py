@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
+from mesa.visualization.modules import ChartModule
 
 '''
 model = Bloodstream(20, 10, 10)
@@ -26,9 +27,14 @@ def agent_portrayal(agent):
 
   return portrayal
 
+chart = ChartModule([{
+  "Label": "Alpha",
+  "Color": "black"}],
+  data_collector_name= "datacollector"
+)
 grid = CanvasGrid(agent_portrayal, 10, 10, 500, 500)
 
-server = ModularServer(Bloodstream, [grid], "Endocrine Model", 100, 10, 10)
+server = ModularServer(Bloodstream, [grid, chart], "Endocrine Model", 100, 10, 10)
 server.port = 8888
 server.launch()
 
