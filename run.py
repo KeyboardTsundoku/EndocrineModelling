@@ -14,27 +14,30 @@ for i in range(20):
 
 def agent_portrayal(agent):
   portrayal = {
-    "Shape": "circle", 
     "Filled": "true", 
-    "Layer": 0, 
-    "r": 0.5 
+    "Layer": 0 
   }
   
-  if type(agent) is Alpha:
+  if type(agent) is TSH:
+    portrayal["Shape"] = "circle" 
     portrayal["Color"] = "red"
-  elif type(agent) is Omega:
+    portrayal["r"] = 0.5
+  elif type(agent) is T4:
+    portrayal["Shape"] = "circle"
+    portrayal["Color"] = "blue"
+    portrayal["r"] = 0.2
+  elif type(agent) is Pituitary:
+    portrayal["Shape"] = "square"
+    portrayal["Color"] = "red"
+  elif type(agent) is Thyroid:
+    portrayal["Shape"] = "square"
     portrayal["Color"] = "blue"
 
   return portrayal
 
-chart = ChartModule([{
-  "Label": "Alpha",
-  "Color": "black"}],
-  data_collector_name= "datacollector"
-)
 grid = CanvasGrid(agent_portrayal, 10, 10, 500, 500)
 
-server = ModularServer(Bloodstream, [grid, chart], "Endocrine Model", 100, 10, 10)
+server = ModularServer(Bloodstream, [grid], "Endocrine Model", 100, 10, 10)
 server.port = 8888
 server.launch()
 
